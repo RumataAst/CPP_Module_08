@@ -6,7 +6,8 @@ Span::Span(unsigned int max_size) : _maxSize(max_size), _numbers() {
     if (_numbers.max_size() < max_size)
         throw MaxNumberException();
 }
-Span::Span(const Span &copy) : _size(copy._size), _numbers(copy._numbers) {}
+Span::Span(const Span &copy) : _maxSize(copy._maxSize), _numbers(copy._numbers) {}
+
 Span &Span::operator = (const Span &source) {
     if (this != &source) {
         this->_maxSize = source._maxSize;
@@ -14,10 +15,10 @@ Span &Span::operator = (const Span &source) {
     }
     return *this;
 }
-Span~Span() {}
+Span::~Span() {}
 
 template <typename T>
-void            addNumbers(const T& container) {
+void            Span::addNumbers(const T& container) {
     if (sizeof(container) != sizeof(int)) {
         throw IncorrectType();
     }
@@ -34,12 +35,14 @@ void            Span::addNumber(int n) {
         _numbers.insert(n);
     }
 }
-void            addRandomNumbers(unsigned int n) {
+void            Span::addRandomNumbers(unsigned int n) {
     if (_numbers.size() + n  > _maxSize || _numbers.size() + n > _numbers.max_size())
         throw MaxNumberException();
     srand(time(NULL));
+    int random_variable = 0;
     for (unsigned int i = 0; i < n; ++i) {
-
+        random_variable = rand();
+        _numbers.insert(random_variable);
     }
 }
 
@@ -52,11 +55,11 @@ unsigned int    Span::getMaxSize() const {
 }
 
 // additional test if the numbers inside multiset are duplicates? 
-unsigned int    shortestSpan() const {
-    if (_numberes.size() == 1 || _numberes.size() == 0)
+unsigned int    Span::shortestSpan() const {
+    if (_numbers.size() == 1 || _numbers.size() == 0)
         throw NoSpanException();
 }
-unsigned int    longestSpan() const {
-    if (_numberes.size() == 1 || _numberes.size() == 0)
+unsigned int    Span::longestSpan() const {
+    if (_numbers.size() == 1 || _numbers.size() == 0)
         throw NoSpanException();
 }

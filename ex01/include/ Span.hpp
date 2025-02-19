@@ -42,7 +42,7 @@ public:
     class   IncorrectType : public std::exception {
         public:
             virtual const char *what() const throw() {
-                return "No Span can be found";
+                return "Incorrect Type";
             }
     };
 };
