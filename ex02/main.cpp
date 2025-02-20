@@ -1,7 +1,6 @@
 #include "MutantStack.hpp"
 #include "MutantStack.tpp"
 
-
 int main()
 {
     MutantStack<int> mstack;

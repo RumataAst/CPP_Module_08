@@ -6,6 +6,7 @@ Span::Span(unsigned int max_size) : _maxSize(max_size), _numbers() {
     if (_numbers.max_size() < max_size)
         throw MaxNumberException();
 }
+
 Span::Span(const Span &copy) : _maxSize(copy._maxSize), _numbers(copy._numbers) {}
 
 Span &Span::operator = (const Span &source) {
