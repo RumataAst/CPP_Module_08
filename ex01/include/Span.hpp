@@ -20,16 +20,16 @@ public:
     Span &operator = (const Span &source);
     ~Span();
 
-    template <typename T>
-    void            addNumbers(const T& container);
     void            addNumber(int n);
     // addRandomNumbers should take n numbers to add container
     void            addRandomNumbers(unsigned int n);
+    template <typename T>
+    void addNumbers(const T& container);
 
-    std::multiset<int>   getNumbers() const;
-    unsigned int    getMaxSize() const;
-    unsigned int    shortestSpan() const;
-    unsigned int    longestSpan() const;
+    std::multiset<int>  getNumbers() const;
+    unsigned int        getMaxSize() const;
+    unsigned int        shortestSpan() const;
+    unsigned int        longestSpan() const;
 
 
     class   MaxNumberException : public std::exception {

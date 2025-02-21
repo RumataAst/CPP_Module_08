@@ -18,18 +18,6 @@ Span &Span::operator = (const Span &source) {
 }
 Span::~Span() {}
 
-template <typename T>
-void            Span::addNumbers(const T& container) {
-    if (sizeof(container) != sizeof(int)) {
-        throw IncorrectType();
-    }
-    if (container.size() + _numbers.size() > _maxSize 
-        || container.size() + _numbers.size() > _numbers.max_size())
-        throw MaxNumberException();
-    
-    _numbers.insert(container.begin(), container.end());
-}
-
 void            Span::addNumber(int n) {
     if (_numbers.size() + 1  > _maxSize || _numbers.size() + 1 > _numbers.max_size())
         throw MaxNumberException();
