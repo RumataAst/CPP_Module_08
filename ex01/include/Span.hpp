@@ -1,11 +1,18 @@
 # ifndef SPAN_HPP
 #define SPAN_HPP
+
+#include <iostream>
 #include <exception>
+#include <set>
+#include <iterator>
+#include <cstdlib>
+#include <limits>
 
 class Span {
 private:
     unsigned int    _maxSize;
-    std::multiset   _numbers;
+    std::multiset<int>   _numbers;
+
 public:
     Span();
     Span(unsigned int max_size);
@@ -19,7 +26,7 @@ public:
     // addRandomNumbers should take n numbers to add container
     void            addRandomNumbers(unsigned int n);
 
-    std::multiset   getNumbers() const;
+    std::multiset<int>   getNumbers() const;
     unsigned int    getMaxSize() const;
     unsigned int    shortestSpan() const;
     unsigned int    longestSpan() const;

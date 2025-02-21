@@ -26,7 +26,8 @@ void            Span::addNumbers(const T& container) {
     if (container.size() + _numbers.size() > _maxSize 
         || container.size() + _numbers.size() > _numbers.max_size())
         throw MaxNumberException();
-    _numbers.insert_range(container.begin(), container.end());
+    
+    _numbers.insert(container.begin(), container.end());
 }
 
 void            Span::addNumber(int n) {
@@ -36,7 +37,7 @@ void            Span::addNumber(int n) {
         _numbers.insert(n);
     }
 }
-void            Span::addRandomNumbers(unsigned int n) {
+void                Span::addRandomNumbers(unsigned int n) {
     if (_numbers.size() + n  > _maxSize || _numbers.size() + n > _numbers.max_size())
         throw MaxNumberException();
     srand(time(NULL));
@@ -47,7 +48,7 @@ void            Span::addRandomNumbers(unsigned int n) {
     }
 }
 
-std::multiset   Span::getNumbers() const {
+std::multiset<int>  Span::getNumbers() const {
     return _numbers;
 }
 
@@ -55,12 +56,28 @@ unsigned int    Span::getMaxSize() const {
     return _maxSize;
 }
 
-// additional test if the numbers inside multiset are duplicates? 
 unsigned int    Span::shortestSpan() const {
-    if (_numbers.size() == 1 || _numbers.size() == 0)
+    if (_numbers.size() < 2)
         throw NoSpanException();
+    
+    unsigned int    minSpan = std::numeric_limits<unsigned int>::max();
+    std::multiset<int>::const_iterator it = _numbers.begin();
+    std::multiset<int>::const_iterator itNext = it;
+    ++itNext;
+
+    while (itNext != _numbers.end()) {
+        unsigned int diff = *itNext - *it;
+        if (diff < minSpan) {
+            minSpan = diff;
+        }
+        ++it;
+        ++itNext;
+    }
+    return minSpan;
 }
+
 unsigned int    Span::longestSpan() const {
-    if (_numbers.size() == 1 || _numbers.size() == 0)
+    if (_numbers.size() < 2)
         throw NoSpanException();
+    return *(_numbers.rbegin()) - *(_numbers.begin());
 }
